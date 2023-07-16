@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
 import com.tqi.challenge.backend.marketplace.services.impl.CategoryService
+import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -20,7 +21,7 @@ class CategoryController(
 
     @PostMapping
     fun createCategory(
-        @RequestBody categoryRequestDTO: CategoryRequestDTO,
+        @Valid @RequestBody categoryRequestDTO: CategoryRequestDTO,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<CategoryRequestDTO>{
         logger.info("Start createCategory - Controller")
