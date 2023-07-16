@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 class CategoryMapper : Mapper<Category, CategoryRequestDTO> {
     override fun map(t: Category): CategoryRequestDTO {
        return CategoryRequestDTO(
-           id = t.id,
            name = t.name
        )
     }

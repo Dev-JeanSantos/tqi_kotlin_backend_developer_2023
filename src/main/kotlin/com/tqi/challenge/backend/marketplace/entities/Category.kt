@@ -5,8 +5,8 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "tb_category")
 data class Category(
+    val name: String,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val name: String
+    var id: Long? = null
 )
