@@ -1,2 +1,2 @@
-# TQI Kotlin backend developer 2023
+# TQI Kotlin Backend Developer 2023
 TQI Backend Kotlin Challenge
