@@ -9,5 +9,6 @@ import org.springframework.http.ResponseEntity
 interface ICategoryService {
     fun createCategory(categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO
     fun getAll(nameTutor: String?, pagination: Pageable): Page<CategoryResponseDTO>
+    fun getCategoryById(id: Long): CategoryResponseDTO
 
 }

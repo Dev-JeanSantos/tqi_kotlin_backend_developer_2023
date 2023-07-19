@@ -42,4 +42,9 @@ class CategoryController(
         logger.info("Start createCategory - Controller")
         return categoryService.getAll(name, pagination)
     }
+
+    @GetMapping("/{id}")
+    fun getCategoryById(@PathVariable id: Long): CategoryResponseDTO {
+        return categoryService.getCategoryById(id)
+    }
 }

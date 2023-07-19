@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.CategoryResponseDTO
+import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.CategoryMapper
 import com.tqi.challenge.backend.marketplace.mappers.CategoryRequestMapper
 import com.tqi.challenge.backend.marketplace.mappers.CategoryResponsePaginationMapper
@@ -10,7 +11,6 @@ import com.tqi.challenge.backend.marketplace.services.ICategoryService
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -42,6 +42,18 @@ class CategoryService(
         }?:categoryRepository.findAll(pagination)
 
         return categories.map { t -> categoryResponsePaginationMapper.map(t) }
+    }
+
+    override fun getCategoryById(id: Long): CategoryResponseDTO {
+        try {
+            logger.info("Start getById - Service")
+            logger.info("validating if the adoption exists com idAdoption:${id} - Service")
+            logger.info("End getById - Service")
+            val possibleCategory = categoryRepository.findById(id).orElseThrow{ NotFoundException("Não encontrado") }
+            return categoryResponsePaginationMapper.map(possibleCategory)
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
 }
