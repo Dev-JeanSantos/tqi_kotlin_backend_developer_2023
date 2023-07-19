@@ -5,11 +5,13 @@ import com.tqi.challenge.backend.marketplace.services.impl.CategoryService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
+
 
 @RestController
 @RequestMapping("/api/v1/marketing/categories")
@@ -21,6 +23,18 @@ class CategoryController(
 
     @PostMapping
     fun createCategory(
+        @Valid @RequestBody categoryRequestDTO: CategoryRequestDTO,
+        uriBuilder: UriComponentsBuilder
+    ): ResponseEntity<CategoryRequestDTO>{
+        logger.info("Start createCategory - Controller")
+        val categoryRequestDTO = categoryService.createCategory(categoryRequestDTO)
+        val uri = uriBuilder.path("id").build().toUri()
+        logger.info("End createCategory - Controller")
+        return ResponseEntity.created(uri).body(categoryRequestDTO)
+    }
+
+    @GetMapping
+    fun getAllCategory(
         @Valid @RequestBody categoryRequestDTO: CategoryRequestDTO,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<CategoryRequestDTO>{

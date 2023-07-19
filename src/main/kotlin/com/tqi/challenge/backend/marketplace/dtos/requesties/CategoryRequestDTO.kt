@@ -1,6 +1,7 @@
 package com.tqi.challenge.backend.marketplace.dtos.requesties
 
-import jakarta.validation.constraints.*
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.Size
 
 data class CategoryRequestDTO(
     @field:NotEmpty(message = "Required field")
