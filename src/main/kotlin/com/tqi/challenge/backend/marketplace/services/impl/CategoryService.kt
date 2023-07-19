@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(
@@ -25,6 +26,7 @@ class CategoryService(
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
+    @Transactional
     override fun createCategory(categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO {
 
         logger.info("Start insertCategory, new Category:${categoryRequestDTO} - Service")
@@ -35,6 +37,7 @@ class CategoryService(
 
     }
 
+    @Transactional(readOnly = true)
     override fun getAll(
         name: String?,
         pagination: Pageable
@@ -47,6 +50,7 @@ class CategoryService(
         return categories.map { t -> categoryResponsePaginationMapper.map(t) }
     }
 
+    @Transactional(readOnly = true)
     override fun getCategoryById(id: Long): CategoryResponseDTO {
 
         logger.info("Start getById - Service")
@@ -58,6 +62,7 @@ class CategoryService(
 
     }
 
+    @Transactional
     override fun update(id: Long, categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO? {
 
         val category = categoryRepository.findById(id).orElseThrow { NotFoundException("Category by Id $id Not Found") }

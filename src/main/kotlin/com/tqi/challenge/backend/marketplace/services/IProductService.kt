@@ -8,10 +8,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 
-interface ICategoryService {
-    fun createCategory(categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO
-    fun getAll(nameTutor: String?, pagination: Pageable): Page<CategoryResponseDTO>
-    fun getCategoryById(id: Long): CategoryResponseDTO
-    fun update(id: Long, categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO?
-    fun delete(id: Long)
+interface IProductService {
+    fun createProduct(productRequestDTO: ProductRequestDTO): ProductResponseDTO?
+
 }
