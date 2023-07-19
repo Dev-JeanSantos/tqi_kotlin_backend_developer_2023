@@ -1,15 +1,16 @@
 package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
+import com.tqi.challenge.backend.marketplace.dtos.responses.CategoryResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.CategoryService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
 
@@ -34,14 +35,11 @@ class CategoryController(
     }
 
     @GetMapping
-    fun getAllCategory(
-        @Valid @RequestBody categoryRequestDTO: CategoryRequestDTO,
-        uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<CategoryRequestDTO>{
+    fun getAllCategories(
+        @RequestParam(required = false) name: String?,
+        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
+    ): Page<CategoryResponseDTO> {
         logger.info("Start createCategory - Controller")
-        val categoryRequestDTO = categoryService.createCategory(categoryRequestDTO)
-        val uri = uriBuilder.path("id").build().toUri()
-        logger.info("End createCategory - Controller")
-        return ResponseEntity.created(uri).body(categoryRequestDTO)
+        return categoryService.getAll(name, pagination)
     }
 }

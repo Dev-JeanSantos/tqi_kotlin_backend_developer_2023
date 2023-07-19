@@ -1,16 +1,22 @@
 package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
+import com.tqi.challenge.backend.marketplace.dtos.responses.CategoryResponseDTO
 import com.tqi.challenge.backend.marketplace.mappers.CategoryMapper
 import com.tqi.challenge.backend.marketplace.mappers.CategoryRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.CategoryResponsePaginationMapper
 import com.tqi.challenge.backend.marketplace.repositories.CategoryRepository
 import com.tqi.challenge.backend.marketplace.services.ICategoryService
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
 class CategoryService(
     private val categoryRequestMapper: CategoryRequestMapper,
+    private val categoryResponsePaginationMapper: CategoryResponsePaginationMapper,
     private val categoryMapper: CategoryMapper,
     private val categoryRepository: CategoryRepository,
 ): ICategoryService {
@@ -25,6 +31,17 @@ class CategoryService(
         logger.info("End insertAdoption of Success - Service")
         return categoryMapper.map(category)
 
+    }
+
+    override fun getAll(
+        name: String?,
+        pagination: Pageable): Page<CategoryResponseDTO> {
+
+        val categories = name?.let {
+            categoryRepository.findByName(name, pagination)
+        }?:categoryRepository.findAll(pagination)
+
+        return categories.map { t -> categoryResponsePaginationMapper.map(t) }
     }
 
 }
