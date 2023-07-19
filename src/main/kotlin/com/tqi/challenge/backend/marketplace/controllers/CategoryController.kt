@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -53,5 +54,11 @@ class CategoryController(
             : ResponseEntity<CategoryRequestDTO> {
         val categoryRequestDTO = categoryService.update(id, categoryRequestDTO)
         return  ResponseEntity.ok().body(categoryRequestDTO)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteCategory(@PathVariable id: Long) {
+        categoryService.delete(id)
     }
 }
