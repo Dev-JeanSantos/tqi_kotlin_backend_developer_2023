@@ -56,4 +56,14 @@ class CategoryService(
         }
     }
 
+    override fun update(id: Long, categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO? {
+        val category = categoryRepository.findById(id).orElseThrow() {
+            NotFoundException("Não encontrado")
+        }
+
+        category.name = categoryRequestDTO.name
+        categoryRepository.save(category)
+        return categoryMapper.map(category)
+    }
+
 }

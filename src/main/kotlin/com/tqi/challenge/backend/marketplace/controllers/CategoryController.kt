@@ -47,4 +47,11 @@ class CategoryController(
     fun getCategoryById(@PathVariable id: Long): CategoryResponseDTO {
         return categoryService.getCategoryById(id)
     }
+
+    @PutMapping("/{id}")
+    fun updateCategory(@PathVariable id: Long, @RequestBody @Valid categoryRequestDTO: CategoryRequestDTO)
+            : ResponseEntity<CategoryRequestDTO> {
+        val categoryRequestDTO = categoryService.update(id, categoryRequestDTO)
+        return  ResponseEntity.ok().body(categoryRequestDTO)
+    }
 }
