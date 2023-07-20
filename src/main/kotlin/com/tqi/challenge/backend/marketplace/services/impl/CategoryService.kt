@@ -55,7 +55,7 @@ class CategoryService(
     override fun getCategoryById(id: Long): CategoryResponseDTO {
 
         logger.info("Start getById - Service")
-        logger.info("validating if the adoption exists com idAdoption:${id} - Service")
+        logger.info("validating if the adoption exists com idCategory:${id} - Service")
         logger.info("End getById - Service")
         val possibleCategory =
             categoryRepository.findById(id).orElseThrow { NotFoundException("Category by Id $id Not Found") }

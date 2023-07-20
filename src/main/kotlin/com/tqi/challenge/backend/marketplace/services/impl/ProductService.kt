@@ -3,8 +3,11 @@ package com.tqi.challenge.backend.marketplace.services.impl
 import com.tqi.challenge.backend.marketplace.dtos.requesties.ProductRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
 import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
+import com.tqi.challenge.backend.marketplace.mappers.CategoryMapper
 import com.tqi.challenge.backend.marketplace.mappers.ProductMapper
+import com.tqi.challenge.backend.marketplace.mappers.requests.CategoryRequestMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.ProductRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.CategoryResponseMapper
 import com.tqi.challenge.backend.marketplace.mappers.responses.ProductResponsePaginationMapper
 import com.tqi.challenge.backend.marketplace.repositories.ProductRepository
 import com.tqi.challenge.backend.marketplace.services.IProductService
@@ -20,6 +23,9 @@ class ProductService(
     private val productMapper: ProductMapper,
     private val productResponsePaginationMapper: ProductResponsePaginationMapper,
     private val productRepository: ProductRepository,
+    private val categoryService: CategoryService,
+    private val categoryResponseMapper: CategoryResponseMapper
+
 ) : IProductService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
@@ -45,6 +51,21 @@ class ProductService(
         val possibleProduct = productRepository.findById(id).orElseThrow { NotFoundException("Product by Id $id Not Found") }
         logger.info("End getById - Service")
         return productMapper.map(possibleProduct)
+    }
+
+    override fun update(id: Long, productRequestDTO: ProductRequestDTO): ProductResponseDTO? {
+        logger.info("Start update - Service")
+        logger.info("validating if the product exists com idProduct:${id} - Service")
+        val product = productRepository.findById(id).orElseThrow{NotFoundException("Product by Id $id Not Found")}
+        logger.info("Product exists com idProduct:${id} - Service")
+        product.name = productRequestDTO.name
+        product.unitMeasure = productRequestDTO.unityMeasure
+        product.price = productRequestDTO.price
+        val possivelCategoria = categoryService.getCategoryById(productRequestDTO.idCategory)
+        product.category =  categoryResponseMapper.map(possivelCategoria)
+        productRepository.save(product)
+        logger.info("Product Update by Success - Service")
+        return productMapper.map(product)
     }
 
 

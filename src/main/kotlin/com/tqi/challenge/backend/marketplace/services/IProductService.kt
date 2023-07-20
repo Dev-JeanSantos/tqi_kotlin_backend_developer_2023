@@ -9,5 +9,6 @@ interface IProductService {
     fun createProduct(productRequestDTO: ProductRequestDTO): ProductResponseDTO?
     fun getAll(pagination: Pageable): Page<ProductResponseDTO>
     fun getProductById(id: Long): ProductResponseDTO
+    fun update(id: Long, productRequestDTO: ProductRequestDTO): ProductResponseDTO?
 
 }

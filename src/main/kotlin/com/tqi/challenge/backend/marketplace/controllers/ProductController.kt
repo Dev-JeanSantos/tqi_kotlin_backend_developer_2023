@@ -44,15 +44,17 @@ class ProductController(
 
     @GetMapping("/{id}")
     fun getProductById(@PathVariable id: Long): ProductResponseDTO {
+        logger.info("Start getProductById - Controller")
         return productService.getProductById(id)
     }
-//
-//    @PutMapping("/{id}")
-//    fun updateCategory(@PathVariable id: Long, @RequestBody @Valid categoryRequestDTO: CategoryRequestDTO)
-//            : ResponseEntity<CategoryRequestDTO> {
-//        val categoryRequestDTO = categoryService.update(id, categoryRequestDTO)
-//        return  ResponseEntity.ok().body(categoryRequestDTO)
-//    }
+    @PutMapping("/{id}")
+    fun updateProduct(@PathVariable id: Long, @RequestBody @Valid productRequestDTO: ProductRequestDTO)
+            : ResponseEntity<ProductResponseDTO> {
+        logger.info("Start updateProduct - Controller")
+        val productResponseDTO = productService.update(id, productRequestDTO)
+        logger.info("End updateProduct - Controller")
+        return  ResponseEntity.ok().body(productResponseDTO)
+    }
 //
 //    @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
