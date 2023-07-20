@@ -30,8 +30,7 @@ class ProductController(
         logger.info("Start createProduct - Controller")
         val productRequestDTO = productService.createProduct(productRequestDTO)
         val uri = uriBuilder.path("id").build().toUri()
-        logger.info("End createCategory - Controller")
-        println(productRequestDTO)
+        logger.info("End createProduct - Controller")
         return ResponseEntity.created(uri).body(productRequestDTO)
     }
 
@@ -39,14 +38,14 @@ class ProductController(
     fun getAllProducts(
         @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
     ): Page<ProductResponseDTO> {
-        logger.info("Start createProduct - Controller")
+        logger.info("Start getAllProduct - Controller")
         return productService.getAll(pagination)
     }
-//
-//    @GetMapping("/{id}")
-//    fun getCategoryById(@PathVariable id: Long): CategoryResponseDTO {
-//        return categoryService.getCategoryById(id)
-//    }
+
+    @GetMapping("/{id}")
+    fun getProductById(@PathVariable id: Long): ProductResponseDTO {
+        return productService.getProductById(id)
+    }
 //
 //    @PutMapping("/{id}")
 //    fun updateCategory(@PathVariable id: Long, @RequestBody @Valid categoryRequestDTO: CategoryRequestDTO)

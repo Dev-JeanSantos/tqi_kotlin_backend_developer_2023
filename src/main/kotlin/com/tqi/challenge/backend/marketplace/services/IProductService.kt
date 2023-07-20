@@ -8,5 +8,6 @@ import org.springframework.data.domain.Pageable
 interface IProductService {
     fun createProduct(productRequestDTO: ProductRequestDTO): ProductResponseDTO?
     fun getAll(pagination: Pageable): Page<ProductResponseDTO>
+    fun getProductById(id: Long): ProductResponseDTO
 
 }

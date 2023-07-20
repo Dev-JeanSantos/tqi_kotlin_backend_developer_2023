@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.ProductRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
+import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.ProductMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.ProductRequestMapper
 import com.tqi.challenge.backend.marketplace.mappers.responses.ProductResponsePaginationMapper
@@ -26,7 +27,7 @@ class ProductService(
         logger.info("Start insertProduct, new Product:${productRequestDTO} - Service")
         val product = productRequestMapper.map(productRequestDTO)
         productRepository.save(product)
-        logger.info("End insertAdoption of Success - Service")
+        logger.info("End insertProduct of Success - Service")
         return productMapper.map(product)
     }
 
@@ -38,33 +39,15 @@ class ProductService(
         return products.map { t -> productResponsePaginationMapper.map(t)}
     }
 
+    override fun getProductById(id: Long): ProductResponseDTO {
+        logger.info("Start getById - Service")
+        logger.info("validating if the product exists com idProduct:${id} - Service")
+        val possibleProduct = productRepository.findById(id).orElseThrow { NotFoundException("Product by Id $id Not Found") }
+        logger.info("End getById - Service")
+        return productMapper.map(possibleProduct)
+    }
 
-//
-//    @Transactional(readOnly = true)
-//    override fun getAll(
-//        name: String?,
-//        pagination: Pageable
-//    ): Page<CategoryResponseDTO> {
-//
-//        val categories = name?.let {
-//            categoryRepository.findByName(name, pagination)
-//        } ?: categoryRepository.findAll(pagination)
-//
-//        return categories.map { t -> categoryResponsePaginationMapper.map(t) }
-//    }
-//
-//    @Transactional(readOnly = true)
-//    override fun getCategoryById(id: Long): CategoryResponseDTO {
-//
-//        logger.info("Start getById - Service")
-//        logger.info("validating if the adoption exists com idAdoption:${id} - Service")
-//        logger.info("End getById - Service")
-//        val possibleCategory =
-//            categoryRepository.findById(id).orElseThrow { NotFoundException("Category by Id $id Not Found") }
-//        return categoryResponsePaginationMapper.map(possibleCategory)
-//
-//    }
-//
+
 //    @Transactional
 //    override fun update(id: Long, categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO? {
 //
