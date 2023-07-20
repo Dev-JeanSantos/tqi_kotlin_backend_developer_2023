@@ -5,6 +5,10 @@ import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.ProductService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -31,14 +35,13 @@ class ProductController(
         return ResponseEntity.created(uri).body(productRequestDTO)
     }
 
-//    @GetMapping
-//    fun getAllCategories(
-//        @RequestParam(required = false) name: String?,
-//        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
-//    ): Page<CategoryResponseDTO> {
-//        logger.info("Start createCategory - Controller")
-//        return categoryService.getAll(name, pagination)
-//    }
+    @GetMapping
+    fun getAllProducts(
+        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
+    ): Page<ProductResponseDTO> {
+        logger.info("Start createProduct - Controller")
+        return productService.getAll(pagination)
+    }
 //
 //    @GetMapping("/{id}")
 //    fun getCategoryById(@PathVariable id: Long): CategoryResponseDTO {

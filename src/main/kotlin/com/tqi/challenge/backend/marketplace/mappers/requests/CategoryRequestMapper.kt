@@ -1,7 +1,8 @@
-package com.tqi.challenge.backend.marketplace.mappers
+package com.tqi.challenge.backend.marketplace.mappers.requests
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
 import com.tqi.challenge.backend.marketplace.entities.Category
+import com.tqi.challenge.backend.marketplace.mappers.Mapper
 import org.springframework.stereotype.Component
 
 @Component

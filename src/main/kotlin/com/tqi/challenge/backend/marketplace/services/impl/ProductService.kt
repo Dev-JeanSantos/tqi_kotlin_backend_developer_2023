@@ -3,17 +3,22 @@ package com.tqi.challenge.backend.marketplace.services.impl
 import com.tqi.challenge.backend.marketplace.dtos.requesties.ProductRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
 import com.tqi.challenge.backend.marketplace.mappers.ProductMapper
-import com.tqi.challenge.backend.marketplace.mappers.ProductRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.requests.ProductRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.ProductResponsePaginationMapper
 import com.tqi.challenge.backend.marketplace.repositories.ProductRepository
 import com.tqi.challenge.backend.marketplace.services.IProductService
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductService(
     private val productRequestMapper: ProductRequestMapper,
     private val productMapper: ProductMapper,
-    private val productRepository: ProductRepository
+    private val productResponsePaginationMapper: ProductResponsePaginationMapper,
+    private val productRepository: ProductRepository,
 ) : IProductService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
@@ -25,16 +30,15 @@ class ProductService(
         return productMapper.map(product)
     }
 
-//    @Transactional
-//    override fun createPro(categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO {
-//
-//        logger.info("Start insertCategory, new Category:${categoryRequestDTO} - Service")
-//        val category = categoryRequestMapper.map(categoryRequestDTO)
-//        categoryRepository.save(category)
-//        logger.info("End insertAdoption of Success - Service")
-//        return categoryMapper.map(category)
-//
-//    }
+    @Transactional
+    override fun getAll(
+        pagination: Pageable
+    ): Page<ProductResponseDTO>{
+        val products = productRepository.findAll(pagination)
+        return products.map { t -> productResponsePaginationMapper.map(t)}
+    }
+
+
 //
 //    @Transactional(readOnly = true)
 //    override fun getAll(

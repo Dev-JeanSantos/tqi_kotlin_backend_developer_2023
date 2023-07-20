@@ -10,19 +10,23 @@ import jakarta.validation.ConstraintValidatorContext;
 class NameValidator(
     val repository: CategoryRepository
 ) : ConstraintValidator<NameValid, CategoryRequestDTO> {
-    override fun isValid(value: CategoryRequestDTO?, context: ConstraintValidatorContext?): Boolean {
-
-        var list: List<FieldMessage> = ArrayList<FieldMessage>()
-
-        val category = repository.findByName(value!!.name)
-        if (category != null) {
-            listOf(FieldMessage("Name", "Name not found!"))
-        }
-        for (FieldMessage in list) {
-            context?.disableDefaultConstraintViolation()
-            context?.buildConstraintViolationWithTemplate(FieldMessage.message)
-                ?.addPropertyNode(FieldMessage.fieldName)?.addConstraintViolation()
-        }
-        return list.isEmpty()
+    //    override fun isValid(value: CategoryRequestDTO?, context: ConstraintValidatorContext?): Boolean {
+//
+////
+////        var list: List<FieldMessage> = ArrayList<FieldMessage>()
+////
+////        val category = repository.findByName(value!!.name)
+////        if (category != null) {
+////            listOf(FieldMessage("Name", "Name not found!"))
+////        }
+////        for (FieldMessage in list) {
+////            context?.disableDefaultConstraintViolation()
+////            context?.buildConstraintViolationWithTemplate(FieldMessage.message)
+////                ?.addPropertyNode(FieldMessage.fieldName)?.addConstraintViolation()
+////        }
+////        return list.isEmpty()
+//    }
+    override fun isValid(p0: CategoryRequestDTO?, p1: ConstraintValidatorContext?): Boolean {
+        TODO("Not yet implemented")
     }
 }

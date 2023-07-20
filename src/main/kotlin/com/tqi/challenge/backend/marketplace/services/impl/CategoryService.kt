@@ -2,11 +2,12 @@ package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CategoryRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.CategoryResponseDTO
+import com.tqi.challenge.backend.marketplace.entities.Category
 import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.CategoryMapper
-import com.tqi.challenge.backend.marketplace.mappers.CategoryRequestMapper
-import com.tqi.challenge.backend.marketplace.mappers.CategoryResponseMapper
-import com.tqi.challenge.backend.marketplace.mappers.CategoryResponsePaginationMapper
+import com.tqi.challenge.backend.marketplace.mappers.requests.CategoryRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.CategoryResponseMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.CategoryResponsePaginationMapper
 import com.tqi.challenge.backend.marketplace.repositories.CategoryRepository
 import com.tqi.challenge.backend.marketplace.services.ICategoryService
 import org.slf4j.LoggerFactory
@@ -74,5 +75,10 @@ class CategoryService(
     override fun delete(id: Long) {
         val category = this.getCategoryById(id)
         categoryRepository.delete(categoryResponseMapper.map(category))
+    }
+
+    override fun findByName(nameCategory: String): Category {
+        val category = categoryRepository.findByNameCategory(nameCategory)
+        return category
     }
 }
