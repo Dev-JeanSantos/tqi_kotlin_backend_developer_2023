@@ -14,4 +14,7 @@ data class Product(
 
     @ManyToOne
     var category: Category,
+
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var cars: List<Cart>? = ArrayList()
 )
