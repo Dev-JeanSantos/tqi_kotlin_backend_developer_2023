@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -55,10 +56,9 @@ class ProductController(
         logger.info("End updateProduct - Controller")
         return  ResponseEntity.ok().body(productResponseDTO)
     }
-//
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    fun deleteCategory(@PathVariable id: Long) {
-//        categoryService.delete(id)
-//    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteProduct(@PathVariable id: Long) {
+        productService.delete(id)
+    }
 }

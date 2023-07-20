@@ -8,6 +8,7 @@ import com.tqi.challenge.backend.marketplace.mappers.ProductMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.CategoryRequestMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.ProductRequestMapper
 import com.tqi.challenge.backend.marketplace.mappers.responses.CategoryResponseMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.ProductResponseMapper
 import com.tqi.challenge.backend.marketplace.mappers.responses.ProductResponsePaginationMapper
 import com.tqi.challenge.backend.marketplace.repositories.ProductRepository
 import com.tqi.challenge.backend.marketplace.services.IProductService
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional
 class ProductService(
     private val productRequestMapper: ProductRequestMapper,
     private val productMapper: ProductMapper,
+    private val productResponseMapper: ProductResponseMapper,
     private val productResponsePaginationMapper: ProductResponsePaginationMapper,
     private val productRepository: ProductRepository,
     private val categoryService: CategoryService,
@@ -68,18 +70,13 @@ class ProductService(
         return productMapper.map(product)
     }
 
-
-//    @Transactional
-//    override fun update(id: Long, categoryRequestDTO: CategoryRequestDTO): CategoryRequestDTO? {
-//
-//        val category = categoryRepository.findById(id).orElseThrow { NotFoundException("Category by Id $id Not Found") }
-//
-//        category.name = categoryRequestDTO.name
-//        categoryRepository.save(category)
-//        return categoryMapper.map(category)
-//    }
-//    override fun delete(id: Long) {
-//        val category = this.getCategoryById(id)
-//        categoryRepository.delete(categoryResponseMapper.map(category))
-//    }
+    override fun delete(id: Long) {
+        logger.info("Start delete - Service")
+        logger.info("validating if the product exists com idProduct:${id} - Service")
+        val product = this.getProductById(id)
+        logger.info("Product exists com idProduct:${id} - Service")
+        logger.info("Product Delete by Success - Service")
+        logger.info("End delete - Service")
+        productRepository.delete(productResponseMapper.map(product))
+    }
 }
