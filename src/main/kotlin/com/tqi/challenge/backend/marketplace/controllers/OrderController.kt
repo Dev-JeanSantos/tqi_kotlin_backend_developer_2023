@@ -23,12 +23,9 @@ class OrderController(
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<OrderResponseDTO>{
         logger.info("Start createOrder - Controller")
-        println(orderRequestDTO)
-        println(orderRequestDTO)
-        println(orderRequestDTO)
-        val orderRequestDTO = orderService.createOrder(orderRequestDTO)
+        val orderResponseDTO = orderService.createOrder(orderRequestDTO)
         val uri = uriBuilder.path("id").build().toUri()
         logger.info("End createOrder - Controller")
-        return ResponseEntity.created(uri).body(orderRequestDTO)
+        return ResponseEntity.created(uri).body(orderResponseDTO)
     }
 }

@@ -4,6 +4,6 @@ import com.tqi.challenge.backend.marketplace.enums.Payment
 
 data class OrderRequestDTO(
     val cartId: Long,
-    val carts: List<ExemploDTO>?,
+    val carts: List<IdItemRequestDTO>,
     val payment: Payment
 )

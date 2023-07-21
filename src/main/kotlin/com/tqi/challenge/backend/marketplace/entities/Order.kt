@@ -12,7 +12,5 @@ data class Order(
     var id: Long? = null,
     val totalSalePrice: Double,
     @Enumerated(EnumType.STRING)
-    val payment: Payment,
-    @ManyToOne
-    val cart: Cart
+    val payment: Payment
 )

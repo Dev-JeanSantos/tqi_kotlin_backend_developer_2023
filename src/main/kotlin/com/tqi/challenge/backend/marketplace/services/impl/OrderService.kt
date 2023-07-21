@@ -14,7 +14,7 @@ class OrderService(
     private val orderRequestMapper: OrderRequestMapper,
     private val orderMapper: OrderMapper,
     private val orderRepository: OrderRepository
-    ) : IOrderService {
+) : IOrderService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
     override fun createOrder(orderRequestDTO: OrderRequestDTO): OrderResponseDTO? {

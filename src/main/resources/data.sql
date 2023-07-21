@@ -25,3 +25,11 @@ INSERT INTO tb_product(name, price, unit_measure, category_id)VALUES ('FARINHA',
 INSERT INTO tb_product(name, price, unit_measure, category_id)VALUES ('ARROZ EXERCITO', 25.80, 'KILOGRAMA', 8)
 INSERT INTO tb_product(name, price, unit_measure, category_id)VALUES ('FEIJÃO BRASILIA', 9.90, 'KILOGRAMA', 8)
 INSERT INTO tb_product(name, price, unit_measure, category_id)VALUES ('ARROZ AERONÁUTICA', 35.10, 'KILOGRAMA', 8)
+
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (180.0, 8, 5)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (13.5, 3, 2)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (24.44, 2, 1)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (36.0, 4, 4)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (77.4, 3, 12)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (41.0, 5, 10)
+INSERT INTO tb_item(price_by_sale, quantity_itens, product_id)VALUES (15.0, 9, 2)
