@@ -38,7 +38,7 @@ class CategoryService(
 
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     override fun getAll(
         name: String?,
         pagination: Pageable

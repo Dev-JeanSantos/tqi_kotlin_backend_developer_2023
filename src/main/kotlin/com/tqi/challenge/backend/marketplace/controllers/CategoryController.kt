@@ -38,7 +38,7 @@ class CategoryController(
     @GetMapping
     fun getAllCategories(
         @RequestParam(required = false) name: String?,
-        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
+        @PageableDefault(size = 6, sort = ["id"], direction = Sort.Direction.DESC) pagination: Pageable
     ): Page<CategoryResponseDTO> {
         logger.info("Start createCategory - Controller")
         return categoryService.getAll(name, pagination)

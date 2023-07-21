@@ -37,7 +37,7 @@ class ProductController(
 
     @GetMapping
     fun getAllProducts(
-        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
+        @PageableDefault(size = 6, sort = ["id"], direction = Sort.Direction.ASC) pagination: Pageable
     ): Page<ProductResponseDTO> {
         logger.info("Start getAllProduct - Controller")
         return productService.getAll(pagination)
