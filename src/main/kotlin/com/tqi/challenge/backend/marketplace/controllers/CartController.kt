@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.CartRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.CartResponseDTO
+import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.CartService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
@@ -28,4 +29,10 @@ class CartController(
         logger.info("End createCart - Controller")
         return ResponseEntity.created(uri).body(cartRequestDTO)
     }
+
+//    @GetMapping("/{id}")
+//    fun getOrderById(@PathVariable id: Long): CartResponseDTO {
+//        logger.info("Start geOrderById - Controller")
+//        return cartService.getOrderById(id)
+//    }
 }

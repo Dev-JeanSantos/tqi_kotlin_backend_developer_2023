@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component
 class CartMapper: Mapper<Cart, CartResponseDTO> {
     override fun map(t: Cart): CartResponseDTO {
         return CartResponseDTO(
-            nameCategory = t.product.category.name,
-            nameProduct = t.product.name,
+            nameCategory = t.product!!.category.name,
+            nameProduct = t.product!!.name,
             quantityItens = t.quantityItens,
-            priceBySale = t.priceBySale
+            priceBySale = t.priceBySale,
+            id = t.id
         )
     }
 }

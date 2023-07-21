@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.ProductRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.ProductResponseDTO
+import com.tqi.challenge.backend.marketplace.entities.Product
 import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.CategoryMapper
 import com.tqi.challenge.backend.marketplace.mappers.ProductMapper
@@ -78,5 +79,10 @@ class ProductService(
         logger.info("Product Delete by Success - Service")
         logger.info("End delete - Service")
         productRepository.delete(productResponseMapper.map(product))
+    }
+
+    override fun findByName(nameProduct: String): Product? {
+        val possivelProduct = productRepository.findByName(nameProduct)
+        return possivelProduct
     }
 }
