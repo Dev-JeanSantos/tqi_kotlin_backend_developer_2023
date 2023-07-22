@@ -19,7 +19,6 @@ import com.tqi.challenge.backend.marketplace.entities.Category as Category
 
 @DataJpaTest
 @Testcontainers
-@ActiveProfiles("dev")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CategoryRepositoryTest {
 
