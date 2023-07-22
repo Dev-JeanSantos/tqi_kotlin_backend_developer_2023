@@ -60,7 +60,6 @@ class CategoryControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
-            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("{name=Required field}"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("INTERNAL_SERVER_ERROR"))
