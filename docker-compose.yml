@@ -1,22 +1,31 @@
-version: '1.0'
+version: "3.7"
 services:
   db:
     image: mysql:8.0.28
-    container_name: mysqldb
+    container_name: marketplacedb
     volumes:
       - db_data:/var/lib/mysql
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: marketplace
-      MYSQL_PASSWORD: root
-    networks: rede-interna
-  app:
-    image: marketplace-backend:v1-dev
-    container_name: marketplace-backend
     ports:
-      -8080:8080
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "marketplace"
+      MYSQL_PASSWORD: "root"
+    networks:
+      rede_interna:
+  app:
+    image: marketplace
+    container_name: marketplace
+    environment:
+      SPRING.DATASOURCE.URL: "jdbc:mysql://localhost:3306/marketplace?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true"
+      SPRING.DATASOURCE.USERNAME: "root"
+      SPRING.DATASOURCE.PASSWORD: "root"
+    ports:
+      - '3080:8080'
     depends_on:
-      -db
-  networks:
-    name: rede_interna
+      - db
+networks:
+  rede_interna:
+volumes:
+  db_data:
