@@ -17,9 +17,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
+import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
-
+@ActiveProfiles("dev")
 internal class CategoryServiceTest {
 
     val categories = PageImpl(listOf(BuildCategory.buildCategory()))
