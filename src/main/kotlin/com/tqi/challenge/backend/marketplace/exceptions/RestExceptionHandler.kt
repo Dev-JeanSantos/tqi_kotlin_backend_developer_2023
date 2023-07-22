@@ -53,7 +53,7 @@ class RestExceptionHandler {
             errorMessage[err.field] = err.defaultMessage
         }
         return ErrorView(
-            status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            status = HttpStatus.BAD_REQUEST.value(),
             error = HttpStatus.INTERNAL_SERVER_ERROR.name,
             message = errorMessage.toString(),
             path = request.servletPath
