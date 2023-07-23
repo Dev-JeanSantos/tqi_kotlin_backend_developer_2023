@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 
 @RestController
-@RequestMapping("/api/v1/marketing/carts")
+@RequestMapping("/api/v1/marketing/items")
 class ItemController(
     private val cartService: ItemService
 ) {

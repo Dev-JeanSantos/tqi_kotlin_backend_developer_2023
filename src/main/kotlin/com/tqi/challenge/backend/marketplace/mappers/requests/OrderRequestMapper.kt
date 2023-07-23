@@ -17,13 +17,13 @@ class OrderRequestMapper(
     override fun map(t: OrderRequestDTO):Order {
         return Order(
             payment = t.payment,
-            totalSalePrice = getPriceTotal(t.carts)
+            totalSalePrice = getPriceTotal(t.items)
         )
     }
     fun getPriceTotal(list: List<IdItemRequestDTO>): Double {
         var custoTotalCompra: Double = 0.0
         for (id in list) {
-            val item = itemResponseMapper.map(cartService.getCartById(id.id))
+            val item = itemResponseMapper.map(cartService.getCartById(id.idItem))
             custoTotalCompra += item.priceBySale
         }
         return custoTotalCompra
