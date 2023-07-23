@@ -53,7 +53,7 @@ class CategoryRepositoryTest {
         categoryRepository.save(category)
         val category = categoryRepository.findByNameCategory(nameCategory)
 
-        assertThat(category).isNull()
+        assertThat(category).isNotNull
         assertThat(category).isExactlyInstanceOf(Category::class.java)
     }
 
