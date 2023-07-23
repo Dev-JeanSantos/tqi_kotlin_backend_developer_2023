@@ -23,4 +23,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Executar Teste
-          run: mvn -B test
+        run: mvn -B test
