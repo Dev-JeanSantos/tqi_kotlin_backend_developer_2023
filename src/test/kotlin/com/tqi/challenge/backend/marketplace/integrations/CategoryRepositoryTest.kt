@@ -1,5 +1,6 @@
 package com.tqi.challenge.backend.marketplace.integrations
 
+import com.tqi.challenge.backend.marketplace.entities.Category
 import com.tqi.challenge.backend.marketplace.mocks.BuildCategory
 import com.tqi.challenge.backend.marketplace.repositories.CategoryRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -7,18 +8,18 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.context.annotation.Profile
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Pageable
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import com.tqi.challenge.backend.marketplace.entities.Category as Category
 
 @DataJpaTest
 @Testcontainers
+@ActiveProfiles("dev")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CategoryRepositoryTest {
 

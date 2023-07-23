@@ -20,8 +20,8 @@ import org.springframework.data.domain.Pageable
 import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
-@ActiveProfiles("dev")
-internal class CategoryServiceTest {
+@ActiveProfiles("test")
+class CategoryServiceTest {
 
     val categories = PageImpl(listOf(BuildCategory.buildCategory()))
 
