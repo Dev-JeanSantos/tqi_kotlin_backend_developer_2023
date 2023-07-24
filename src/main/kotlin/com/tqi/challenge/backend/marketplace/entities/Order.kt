@@ -10,7 +10,7 @@ data class Order(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     var id: Long? = null,
-    val totalSalePrice: Double,
+    var totalSalePrice: Double,
     @Enumerated(EnumType.STRING)
-    val payment: Payment
+    var payment: Payment
 )

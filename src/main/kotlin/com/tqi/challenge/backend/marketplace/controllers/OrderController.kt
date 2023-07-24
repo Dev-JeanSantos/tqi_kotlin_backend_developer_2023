@@ -1,7 +1,6 @@
 package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.OrderRequestDTO
-import com.tqi.challenge.backend.marketplace.dtos.responses.ItemResponseDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.OrderResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.OrderService
 import jakarta.validation.Valid
@@ -59,5 +58,14 @@ class OrderController(
         logger.info("Start deleteOrder - Controller")
         logger.info("End deleteOrder - Controller")
         orderService.delete(id)
+    }
+
+    @PutMapping("/{id}")
+    fun updateOrder(@PathVariable id: Long, @RequestBody @Valid orderRequestDTO: OrderRequestDTO)
+            : ResponseEntity<OrderResponseDTO> {
+        logger.info("Start updateOrder - Controller")
+        val orderResponseDTO = orderService.update(id, orderRequestDTO)
+        logger.info("End updateOrder - Controller")
+        return  ResponseEntity.ok().body(orderResponseDTO)
     }
 }
