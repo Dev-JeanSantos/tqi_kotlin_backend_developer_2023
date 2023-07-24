@@ -26,7 +26,7 @@ class ItemController(
     fun createItem(
         @Valid @RequestBody itemRequestDTO: ItemRequestDTO,
         uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<ItemResponseDTO>{
+    ): ResponseEntity<ItemResponseDTO> {
         logger.info("Start createItem - Controller")
         val itemRequestDTO = itemService.createCart(itemRequestDTO)
         val uri = uriBuilder.path("id").build().toUri()
@@ -43,9 +43,12 @@ class ItemController(
         logger.info("End getAllItem - Controller")
         return items
     }
-//    @GetMapping("/{id}")
-//    fun getOrderById(@PathVariable id: Long): CartResponseDTO {
-//        logger.info("Start geOrderById - Controller")
-//        return cartService.getOrderById(id)
-//    }
+
+    @GetMapping("/{id}")
+    fun getItemById(@PathVariable id: Long): ItemResponseDTO {
+        logger.info("Start geItemById - Controller")
+        val possibleItem = itemService.getItemById(id)
+        logger.info("End geItemById - Item ${possibleItem} Found! -Controller")
+        return possibleItem
+    }
 }

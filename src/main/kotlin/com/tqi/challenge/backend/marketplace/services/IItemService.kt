@@ -9,4 +9,5 @@ interface IItemService {
     fun createCart(itemRequestDTO: ItemRequestDTO): ItemResponseDTO?
     fun getCartById(id: Long): ItemResponseDTO
     fun getAll(pagination: Pageable): Page<ItemResponseDTO>
+    fun getItemById(id: Long): ItemResponseDTO
 }

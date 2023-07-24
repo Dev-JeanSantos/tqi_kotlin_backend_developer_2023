@@ -43,4 +43,13 @@ class ItemService(
         logger.info("End getAll - Service")
         return items.map { t -> itemMapper.map(t) }
     }
+
+    override fun getItemById(id: Long): ItemResponseDTO {
+        logger.info("Start getItemById - Service")
+        logger.info("validating if the Item exists com idItem:${id} - Service")
+        val possibleItem =
+            itemRepository.findById(id).orElseThrow { NotFoundException("Item by Id: $id Not Found") }
+        logger.info("End getItemById - Service")
+        return itemMapper.map(possibleItem)
+    }
 }
