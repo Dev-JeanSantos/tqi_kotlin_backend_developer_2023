@@ -43,4 +43,12 @@ class OrderController(
         logger.info("End getAllOrders - Controller")
         return orders
     }
+
+    @GetMapping("/{id}")
+    fun getOrderById(@PathVariable id: Long): OrderResponseDTO {
+        logger.info("Start getOrderById - Controller")
+        val possibleOrder = orderService.getOrderById(id)
+        logger.info("End getOrderById - Item ${possibleOrder} Found! -Controller")
+        return possibleOrder
+    }
 }

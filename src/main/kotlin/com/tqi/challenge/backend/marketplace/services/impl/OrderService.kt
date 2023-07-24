@@ -2,6 +2,7 @@ package com.tqi.challenge.backend.marketplace.services.impl
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.OrderRequestDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.OrderResponseDTO
+import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.OrderMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.OrderRequestMapper
 import com.tqi.challenge.backend.marketplace.repositories.OrderRepository
@@ -32,5 +33,14 @@ class OrderService(
         val orders = orderRepository.findAll(pagination)
         logger.info("End getAll - Service")
         return orders.map { t -> orderMapper.map(t) }
+    }
+
+    override fun getOrderById(id: Long): OrderResponseDTO {
+        logger.info("Start getOrderById - Service")
+        logger.info("validating if the Item exists com idOrder:${id} - Service")
+        val possibleOrder =
+            orderRepository.findById(id).orElseThrow { NotFoundException("Order by Id: $id Not Found") }
+        logger.info("End getOrderById - Service")
+        return orderMapper.map(possibleOrder)
     }
 }
