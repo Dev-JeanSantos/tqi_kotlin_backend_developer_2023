@@ -1,10 +1,15 @@
 package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.OrderRequestDTO
+import com.tqi.challenge.backend.marketplace.dtos.responses.ItemResponseDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.OrderResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.OrderService
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -27,5 +32,15 @@ class OrderController(
         val uri = uriBuilder.path("id").build().toUri()
         logger.info("End createOrder - Controller")
         return ResponseEntity.created(uri).body(orderResponseDTO)
+    }
+
+    @GetMapping
+    fun getAllOrders(
+        @PageableDefault(size = 12, sort = ["id"], direction = Sort.Direction.DESC) pagination: Pageable
+    ): Page<OrderResponseDTO> {
+        logger.info("Start getAllOrders - Controller")
+        val orders = orderService.getAll(pagination)
+        logger.info("End getAllOrders - Controller")
+        return orders
     }
 }

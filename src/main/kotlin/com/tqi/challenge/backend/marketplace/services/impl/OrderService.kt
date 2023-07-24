@@ -7,6 +7,8 @@ import com.tqi.challenge.backend.marketplace.mappers.requests.OrderRequestMapper
 import com.tqi.challenge.backend.marketplace.repositories.OrderRepository
 import com.tqi.challenge.backend.marketplace.services.IOrderService
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -23,5 +25,12 @@ class OrderService(
         orderRepository.save(order)
         logger.info("End insertOrder of Success - Service")
         return orderMapper.map(order)
+    }
+
+    override fun getAll(pagination: Pageable): Page<OrderResponseDTO> {
+        logger.info("Start getAll - Service")
+        val orders = orderRepository.findAll(pagination)
+        logger.info("End getAll - Service")
+        return orders.map { t -> orderMapper.map(t) }
     }
 }
