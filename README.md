@@ -112,7 +112,7 @@ acesse: [Documentação do Swagger](https://ju-marketplace-8b8b843c329f.herokuap
 ## Hospedagem no Heroku
 
 A Solução está hospedada em produção na plataforma Heroku na seguinte URL:
-[https://wwc-2023-prd.up.railway.app/swagger-ui.html](https://ju-marketplace-8b8b843c329f.herokuapp.com)
+[https://ju-marketplace-8b8b843c329f.herokuapp.com](https://ju-marketplace-8b8b843c329f.herokuapp.com)
 
 ## Licença
 
