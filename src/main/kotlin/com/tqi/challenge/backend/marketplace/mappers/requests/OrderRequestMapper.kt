@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class OrderRequestMapper(
-    private val cartService: ItemService,
+    private val itemService: ItemService,
     private val  itemResponseMapper: ItemResponseMapper
 
 ): Mapper<OrderRequestDTO, Order> {
@@ -23,7 +23,7 @@ class OrderRequestMapper(
     fun getPriceTotal(list: List<IdItemRequestDTO>): Double {
         var custoTotalCompra: Double = 0.0
         for (id in list) {
-            val item = itemResponseMapper.map(cartService.getCartById(id.idItem))
+            val item = itemResponseMapper.map(itemService.getCartById(id.idItem))
             custoTotalCompra += item.priceBySale
         }
         return custoTotalCompra

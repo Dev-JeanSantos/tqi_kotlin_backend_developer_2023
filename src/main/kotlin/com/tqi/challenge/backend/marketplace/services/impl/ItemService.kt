@@ -5,6 +5,7 @@ import com.tqi.challenge.backend.marketplace.dtos.responses.ItemResponseDTO
 import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.ItemMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.ItemRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.ItemResponseMapper
 import com.tqi.challenge.backend.marketplace.repositories.ItemRepository
 import com.tqi.challenge.backend.marketplace.services.IItemService
 import org.slf4j.LoggerFactory
@@ -17,11 +18,13 @@ class ItemService(
     private val itemRequestMapper: ItemRequestMapper,
     private val itemMapper: ItemMapper,
     private val itemRepository: ItemRepository,
+    private val itemResponseMapper: ItemResponseMapper
+
 
     ) : IItemService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
-    override fun createCart(itemRequestDTO: ItemRequestDTO): ItemResponseDTO? {
+    override fun createItem(itemRequestDTO: ItemRequestDTO): ItemResponseDTO? {
         logger.info("Start insertCart, new Cart:${itemRequestDTO} - Service")
         val cart = itemRequestMapper.map(itemRequestDTO)
         itemRepository.save(cart)
@@ -52,4 +55,11 @@ class ItemService(
         logger.info("End getItemById - Service")
         return itemMapper.map(possibleItem)
     }
+    override fun delete(id: Long) {
+        logger.info("Start deleteItemById - Service")
+        val item = itemResponseMapper.map(getItemById(id))
+        logger.info("End deleteItemById - Service")
+        itemRepository.delete(item)
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.tqi.challenge.backend.marketplace.controllers
 
 import com.tqi.challenge.backend.marketplace.dtos.requesties.ItemRequestDTO
-import com.tqi.challenge.backend.marketplace.dtos.responses.CategoryResponseDTO
 import com.tqi.challenge.backend.marketplace.dtos.responses.ItemResponseDTO
 import com.tqi.challenge.backend.marketplace.services.impl.ItemService
 import jakarta.validation.Valid
@@ -10,6 +9,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -28,7 +28,7 @@ class ItemController(
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<ItemResponseDTO> {
         logger.info("Start createItem - Controller")
-        val itemRequestDTO = itemService.createCart(itemRequestDTO)
+        val itemRequestDTO = itemService.createItem(itemRequestDTO)
         val uri = uriBuilder.path("id").build().toUri()
         logger.info("End createItem - Controller")
         return ResponseEntity.created(uri).body(itemRequestDTO)
@@ -50,5 +50,13 @@ class ItemController(
         val possibleItem = itemService.getItemById(id)
         logger.info("End geItemById - Item ${possibleItem} Found! -Controller")
         return possibleItem
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteItem(@PathVariable id: Long) {
+        logger.info("Start deleteItem - Controller")
+        logger.info("End deleteItem - Controller")
+        itemService.delete(id)
     }
 }
