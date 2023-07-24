@@ -10,4 +10,5 @@ interface IOrderService {
     fun createOrder(orderRequestDTO: OrderRequestDTO): OrderResponseDTO?
     fun getAll(pagination: Pageable): Page<OrderResponseDTO>
     fun getOrderById(id: Long): OrderResponseDTO
+    fun delete(id: Long)
 }

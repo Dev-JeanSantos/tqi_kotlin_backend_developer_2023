@@ -5,6 +5,7 @@ import com.tqi.challenge.backend.marketplace.dtos.responses.OrderResponseDTO
 import com.tqi.challenge.backend.marketplace.exceptions.NotFoundException
 import com.tqi.challenge.backend.marketplace.mappers.OrderMapper
 import com.tqi.challenge.backend.marketplace.mappers.requests.OrderRequestMapper
+import com.tqi.challenge.backend.marketplace.mappers.responses.OrderResponseMapper
 import com.tqi.challenge.backend.marketplace.repositories.OrderRepository
 import com.tqi.challenge.backend.marketplace.services.IOrderService
 import org.slf4j.LoggerFactory
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Service
 class OrderService(
     private val orderRequestMapper: OrderRequestMapper,
     private val orderMapper: OrderMapper,
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val orderResponseMapper: OrderResponseMapper
 ) : IOrderService {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
@@ -38,9 +40,16 @@ class OrderService(
     override fun getOrderById(id: Long): OrderResponseDTO {
         logger.info("Start getOrderById - Service")
         logger.info("validating if the Item exists com idOrder:${id} - Service")
-        val possibleOrder =
-            orderRepository.findById(id).orElseThrow { NotFoundException("Order by Id: $id Not Found") }
+        val possibleOrder = orderRepository.findById(id).orElseThrow { NotFoundException("Order by Id: $id Not Found") }
         logger.info("End getOrderById - Service")
         return orderMapper.map(possibleOrder)
+    }
+
+    override fun delete(id: Long) {
+        logger.info("Start deleteOrderById - Service")
+        val order = orderRepository.findById(id).orElseThrow{NotFoundException("Order by Id: $id Not Found")}
+        println(order)
+        logger.info("End deleteOrderById - Service")
+        orderRepository.delete(order)
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -50,5 +51,13 @@ class OrderController(
         val possibleOrder = orderService.getOrderById(id)
         logger.info("End getOrderById - Item ${possibleOrder} Found! -Controller")
         return possibleOrder
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteOrder(@PathVariable id: Long) {
+        logger.info("Start deleteOrder - Controller")
+        logger.info("End deleteOrder - Controller")
+        orderService.delete(id)
     }
 }
