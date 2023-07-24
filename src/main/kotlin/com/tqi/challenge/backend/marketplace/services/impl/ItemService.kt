@@ -8,6 +8,8 @@ import com.tqi.challenge.backend.marketplace.mappers.requests.ItemRequestMapper
 import com.tqi.challenge.backend.marketplace.repositories.ItemRepository
 import com.tqi.challenge.backend.marketplace.services.IItemService
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -33,5 +35,12 @@ class ItemService(
         val possibleCart = itemRepository.findById(id).orElseThrow { NotFoundException("Order by Id $id Not Found") }
         logger.info("End getById - Service")
         return itemMapper.map(possibleCart)
+    }
+
+    override fun getAll(pagination: Pageable): Page<ItemResponseDTO> {
+        logger.info("Start getAll - Service")
+        val items = itemRepository.findAll(pagination)
+        logger.info("End getAll - Service")
+        return items.map { t -> itemMapper.map(t) }
     }
 }
