@@ -1,9 +1,4 @@
 # TQI Backend Kotlin Developer 2023
-
-## TQI Backend Kotlin Challenge
-
-Este é um projeto que visa avaliar competências em desenvolvimento backend com Kotlin baseado em no processo de aprendizagem do bootcamp do time da DIO e a TQI. O projeto inclui uma API em Kotlin que simula um cenário de venda de auto-atendimento.
-
 <p align="center">
      <a alt="Java">
         <img src="https://img.shields.io/npm/l/react" />
@@ -28,6 +23,16 @@ Este é um projeto que visa avaliar competências em desenvolvimento backend com
     </a>
 </p>
 
+![Web 1](https://github.com/Dev-JeanSantos/assets/blob/main/tqi_kotlin/logo.jpg)
+## TQI Backend Kotlin Challenge
+
+Este é um projeto que visa avaliar competências em desenvolvimento backend com Kotlin baseado em no processo de aprendizagem do bootcamp do time da DIO e a TQI. O projeto inclui uma API em Kotlin que simula um cenário de venda de auto-atendimento.
+
+![Web 2](https://github.com/Dev-JeanSantos/assets/blob/main/tqi_kotlin/banner.png)
+
+
+## Modelo conceitual
+![Modelo Conceitual](https://github.com/Dev-JeanSantos/assets/blob/main/tqi_kotlin/modelagem.jpg)
 ## Configuração
 
 Essas instruções fornecerão aos usuários as etapas necessárias para clonar o repositório e iniciar a aplicação em
